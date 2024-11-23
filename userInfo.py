@@ -15,7 +15,7 @@ class TemplateMessageBox(QMessageBox):
         self.setIcon(icon)
 
 class DataGetter:
-    def __init__(self, tables: dict, lineEdits: dict, lineEditsLinkedTables: dict = {}):
+    def __init__(self, tables: dict, lineEdits: dict = {}, lineEditsLinkedTables: dict = {}):
         '''
         tables -> dict(str: TableHandler)
         lineEdits -> dict(str: QLineEdit)

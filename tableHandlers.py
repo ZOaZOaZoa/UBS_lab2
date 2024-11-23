@@ -33,8 +33,9 @@ class TableHandler:
         '''
         Валидирует значение в соответствии со следующими критериями: значение непустое, вещественное типа float, неотрицательное. Возвращает код результата проверки и само проверенное значение, если оно прошло валидацию.
         '''
-        if not item:
-            return ('empty_cell', None)
+        if not item.text():
+            item.setText('0')
+            return ('good', 0)
         
         try:
             item_f = float(item.text())

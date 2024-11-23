@@ -44,7 +44,7 @@ class GraphDrawer:
 
         #Дуги
         nx.draw_networkx_edges(self.G, self.pos, ax=ax, edgelist=self.straight_edges)
-        arc_rad = 0.25
+        arc_rad = 0.35
         nx.draw_networkx_edges(self.G, self.pos, ax=ax, edgelist=self.curved_edges,
                             connectionstyle=f'arc3, rad = {arc_rad}')
 
@@ -59,11 +59,15 @@ class GraphDrawer:
 
 
 def main():
+    '''
+    Демо работы модуля
+    '''
     edges_list = [
         ('A', 'B', {'weight': 10}),
         ('A', 'C', {'weight': 20}),
         ('B', 'D', {'weight': 30}),
         ('A', 'D', {'weight': 20}),
+        ('A', 'F', {'weight': 15}),
         ('C', 'E', {'weight': 40}),
         ('D', 'F', {'weight': 50}),
         ('E', 'F', {'weight': 60})

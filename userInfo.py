@@ -58,6 +58,4 @@ class DataGetter:
             msg.exec()
             return False
         except ValueError as e:
-            msg = TemplateMessageBox("Неверно введённые данные", str(e), QMessageBox.Icon.Warning)
-            msg.exec()
             return True

@@ -1,9 +1,10 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QComboBox
+from PyQt6.QtWidgets import QApplication, QComboBox, QTextBrowser
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtGui import QPainter
 import numpy as np
 from GraphDrawer import GraphDrawer
+from GraphOptimizer import GraphOptimizer
 from pathlib import Path
 
 drawingAllowed = False
@@ -46,6 +47,10 @@ def draw_graph(graphOptimizer, A_table):
     global drawingAllowed
     drawingAllowed = True
 
+def calc_min_tracks(start_node_name: str, graphOptimizer: GraphOptimizer, tracksInfo: QTextBrowser):
+    graphOptimizer.min_tracks_from(start_node_name)
+    tracksInfo.setText(graphOptimizer.min_tracks_info_str())
+
 def main():
     Form, Window = uic.loadUiType("main_window.ui")
     app = QApplication([])
@@ -60,14 +65,15 @@ def main():
     from userInfo import DataGetter
     dataGetter = DataGetter({'A': A_table})
 
-    from GraphOptimizer import GraphOptimizer
     graphOptimizer = GraphOptimizer(A_table.matrix)
     
     form.dataInput.clicked.connect(lambda: (
         input_data(dataGetter, graphOptimizer, A_table),
         add_nodes_to_combo(graphOptimizer.levels.keys(), form.nodesCombo),
+        calc_min_tracks(form.nodesCombo.currentText(), graphOptimizer, form.tracksInfo),
         draw_graph(graphOptimizer, A_table)
     ))
+    form.nodesCombo.activated.connect(lambda: calc_min_tracks(form.nodesCombo.currentText(), graphOptimizer, form.tracksInfo))
 
     def showSVG(event):
         global drawingAllowed

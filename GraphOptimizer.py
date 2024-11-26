@@ -66,13 +66,11 @@ class GraphOptimizer:
         column2 = 10
         column3 = 20
         res = f"{'Узел':>{column1}}  {'Расстояние':>{column2}}  {'Кратчайший путь':>{column3}}\n"
-        print(self.tracks_info)
         for node_name, info in sorted(self.tracks_info.items(), key=lambda x: int(x[0])):
             price = info[0]
             min_track = info[1]
             if price < np.inf:
                 res += f'{node_name:>{column1}}  {price:>{column2}}  {min_track:>{column3}}\n'  
 
-        print(res)
         return res          
 
